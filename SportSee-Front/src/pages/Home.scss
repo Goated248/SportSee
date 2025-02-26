@@ -1,0 +1,31 @@
+.main-page {
+    display: flex;
+    flex-direction: row;
+}
+.container {
+    height:100%;
+}
+.active-page {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 15px;
+    padding-left: 15px;
+
+    &_main {
+        width: 100%;
+
+        &_charts{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+    }
+
+    &_key_infos{
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+    }
+   
+}

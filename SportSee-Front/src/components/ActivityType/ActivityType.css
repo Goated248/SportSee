@@ -1,1 +1,10 @@
-/*# sourceMappingURL=ActivityType.css.map */
+.activity-type_chart {
+  background-color: #000;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  max-width: 258px;
+  max-height: 263px;
+}/*# sourceMappingURL=ActivityType.css.map */

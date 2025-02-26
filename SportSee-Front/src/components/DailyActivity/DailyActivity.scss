@@ -1,0 +1,20 @@
+.activity-tooltip {
+    background-color: rgb(230, 0, 0);
+    padding: 5px;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+}
+
+.daily-activity {
+    height: 321px;
+
+    & h3 {
+        margin-top: 0;
+        margin-bottom: -40px;
+    }
+}
+
+
+.text-color-class {
+    color: #74798C;
+}

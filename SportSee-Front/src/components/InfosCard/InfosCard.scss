@@ -1,0 +1,40 @@
+.card {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(251, 251, 251, 1);
+    height: 124px;
+    font-family: 'Roboto',sans-serif;
+    border-radius: 10px;
+
+    &-container{
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        z-index: 2;
+        
+        
+        &_icon {
+            width: 19px;
+            height: 19px;
+            z-index: 1;
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+
+        & h3 {
+            margin:0;
+        }
+        & p {
+            margin:0;
+            color: #74798C;
+        }
+    }
+}

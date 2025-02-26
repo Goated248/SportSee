@@ -1,1 +1,5 @@
-/*# sourceMappingURL=KeyInfos.css.map */
+.key-infos {
+  width: 263px;
+  display: grid;
+  gap: 15px;
+}/*# sourceMappingURL=KeyInfos.css.map */

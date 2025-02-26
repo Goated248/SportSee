@@ -1,0 +1,35 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(251, 251, 251);
+  height: 124px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 10px;
+}
+.card-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  z-index: 2;
+}
+.card-container_icon {
+  width: 19px;
+  height: 19px;
+  z-index: 1;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+}
+.card-content h3 {
+  margin: 0;
+}
+.card-content p {
+  margin: 0;
+  color: #74798C;
+}/*# sourceMappingURL=InfosCard.css.map */

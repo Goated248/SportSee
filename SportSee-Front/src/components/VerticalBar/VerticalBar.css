@@ -1,0 +1,29 @@
+.vertical-bar {
+  width: 117px;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.icons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.icons img {
+  width: 64px;
+  height: 64px;
+}
+
+.copyright {
+  writing-mode: sideways-lr;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+}/*# sourceMappingURL=VerticalBar.css.map */

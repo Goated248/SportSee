@@ -5,4 +5,6 @@ WORKDIR /app
 
 RUN yarn
 
+CMD [ "node", "app/index.js" ]
+
 EXPOSE 3000
