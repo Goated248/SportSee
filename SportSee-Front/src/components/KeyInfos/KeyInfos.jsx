@@ -1,4 +1,5 @@
 import "./KeyInfos.css"
+import { useParams } from "react-router-dom";
 import React,{useState, useEffect} from "react"
 import InfosCard from "../InfosCard/InfosCard";
 import { getUserInfo } from "../../api/api.js";
@@ -9,7 +10,7 @@ import lipIcon from "../../assets/cheeseburger.svg";
 
 const KeyInfos = ()=> {
     const [user, setUser] = useState(null);
-    const userId = 18;
+    const {userId} = useParams();
     useEffect(() => {
         const fetchUser = async () => {
             try {

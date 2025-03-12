@@ -1,34 +1,41 @@
 import "./Score.css"
+import { useParams } from "react-router-dom";
 import React,{useEffect, useState} from "react"
 import { RadialBarChart, RadialBar, ResponsiveContainer, Legend } from "recharts";
+import { getUserInfo } from "../../api/api";
+ 
 
-const userData = {
-    "data": {
-      "id": 18,
-      "userInfos": {
-        "firstName": "Cecilia",
-        "lastName": "Ratorez",
-        "age": 34
-      },
-      "score": 0.3, // 30%
-      "keyData": {
-        "calorieCount": 2500,
-        "proteinCount": 90,
-        "carbohydrateCount": 150,
-        "lipidCount": 120
+
+
+
+const Score = ()=> {
+  const { userId } = useParams(); // Récupération de userId depuis l'URL
+  const [score, setScore] = useState(null); // État pour stocker le score
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setLoading(true);
+        const data = await getUserInfo(userId);
+        const userScore = data.data.todayScore || data.data.score
+        setScore(userScore);
+      } catch (err) {
+        setError("Impossible de récupérer les données");
+      } finally {
+        setLoading(false);
       }
-    }
-    
-  };
-  
-  const score = userData.todayScore || userData.data.score;
+    };
+
+    fetchUserData();
+  }, [userId]); // Se met à jour si userId change
+
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>{error}</p>;
+  if (score === null) return <p>Aucune donnée disponible</p>;
+
   const scorePercentage = score * 100;
-
-
-
-
-const Score = (userId)=> {
-
 
   
   const renderCustomizedLabel = ({ viewBox }) => {
@@ -46,7 +53,7 @@ const Score = (userId)=> {
     );
   };
 
-    // Données pour le graphique
+    //donnée pour graphique
     const data = [
       { name: "Completion", value: scorePercentage, fill: "#ff0000" }, // Jauge rouge
       
@@ -62,7 +69,7 @@ const Score = (userId)=> {
             innerRadius="80%" 
             outerRadius="100%" 
             startAngle={90} 
-            endAngle={90 + (360 * userData.data.score)} 
+            endAngle={90 + (360 * score)} 
             barSize={10} 
             data={data}
             radius={[50, 50, 0, 0]}

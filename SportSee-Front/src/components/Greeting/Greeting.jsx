@@ -23,7 +23,7 @@ const Greeting = ()=> {
         <div className="greeting">
           {user ? <>
         <h1 className="greeting-title">Bonjour <span className="greeting-user">{user.firstName}</span> !</h1>
-        <p>Félicitations! Vous avez explosé vos objectifs hier.</p>
+        <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       </>
       : <p>Chargement...</p>}
         </div>

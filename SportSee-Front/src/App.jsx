@@ -7,8 +7,8 @@ function App() {
     return (
         <Router>
         <Routes>
-        <Route path="/:userId" element={<Home />} /> {/* Route dynamique */}
-        <Route path="/" element={<Home />} /> {/* Redirection par défaut */}
+        <Route path="/:userId" element={<Home />} /> 
+        <Route path="/" element={<Home />} /> 
         </Routes>
     </Router>
     )

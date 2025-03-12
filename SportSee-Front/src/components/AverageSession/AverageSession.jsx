@@ -1,16 +1,8 @@
 import "./AverageSession.css";
-import React, {useEffect} from "react";
+import { getUserAverageSessions } from "../../api/api";
+import React, {useEffect, useState, useRef} from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,Rectangle } from "recharts";
-
-const data = [
-  { day:"L", sessionLength: 30 },
-  { day: "M", sessionLength: 40 },
-  { day: "M", sessionLength: 50 },
-  { day: "J", sessionLength: 30 },
-  { day: "V", sessionLength: 30 },
-  { day: "S", sessionLength: 50 },
-  { day: "D", sessionLength: 50 }
-];
+import { useParams } from "react-router-dom";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -23,40 +15,82 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const CustomCursor = (props) => {
-  const { points, width, height,} = props;
-  const { x, y } = points[0];
-  console.log(props);
+const CustomCursor = ({ points, currentChartProprotions }) => {
+  if (!points || points.length === 0) return null;
+  const { x } = points[0];
+
   return (
     <Rectangle
-      fill="#E60000"
+      fill="rgba(255, 255, 255, 0.2)"
 
-      stroke="#E60000"
+      
       x={x}
-      y={y}
-      width={width}
-      height={height}
+      y={0}
+      width={currentChartProprotions?.clientWidth}
+      height={currentChartProprotions?.clientHeight}
       className="line-cursor"
     />
   );
 };
 
 const AverageSession = () => {
-  const formattedData = data.map(session => ({
-    day: `${session.day}`,
-    sessionLength: session.sessionLength
-  }));
+  const {userId} = useParams();
+  const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const containerRef = useRef(null)
+  const [currentChartProprotions, setCurrentChartProportions] = useState(null);
+
+  useEffect(() => {
+    if (containerRef?.current) {
+      setCurrentChartProportions(containerRef.current);
+    }
+
+    const fetchUserSession = async () => {
+      try {
+        setLoading(true);
+        const sessionData = await getUserAverageSessions(userId);
+        const daysMapping = ["L", "M", "M", "J", "V", "S", "D"];
+        
+        const formattedData = [
+          { day: "", sessionLength: sessionData.data.sessions[0].sessionLength }, 
+          ...sessionData.data.sessions.map(session => ({
+            day: daysMapping[session.day - 1],
+            sessionLength: session.sessionLength
+          })),
+          { day: "", sessionLength: sessionData.data.sessions[sessionData.data.sessions.length - 1].sessionLength } 
+        ];
+        
+
+        setSessionData(formattedData);
+      } catch (error) {
+        setError("Erreur lors de la récupération des données.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserSession();
+  }, [userId]);
+
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>{error}</p>;
+  if (!sessionData) return <p>Aucune donnée disponible</p>;
 
   return (
     <div className="line-chart">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={formattedData} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
-        <text x="50%" y="20" textAnchor="middle" fontSize="16" fontWeight="bold"  style={{color:"rgba(255, 255, 255, 0.5) "}}>
-        Durée moyenne des sessions
-       </text>
-          <XAxis padding={{ left: 10, right: 10 }} tickLine={false} axisLine={false} dataKey="day" stroke="#8884d8" tick={{ fill: '#FFFFFF', opacity: '0.5' }}/>
-          <Tooltip contentStyle={{ backgroundColor: "#fff", borderRadius: "10px" }} cursor={<CustomCursor/>} content={CustomTooltip}/>
-          <Line type="monotone" dataKey="sessionLength" stroke="#fff" strokeWidth={2} dot={false} />
+  
+  <div className="chart-title">Durée moyenne des <br /> sessions</div>
+      <ResponsiveContainer width="100%" height="100%" ref={containerRef}>
+        <LineChart data={sessionData} >
+        <YAxis 
+      hide={true} 
+      domain={['dataMin - 10', 'dataMax + 20']} // Ajoute un écart pour descendre la ligne
+    />
+          <XAxis padding={{ left: -20, right: -20 }} tickLine={false} axisLine={false} dataKey="day" stroke="#8884d8" tick={{ fill: '#FFFFFF', opacity: '0.5' }}/>
+          <Tooltip contentStyle={{ backgroundColor: "#fff", borderRadius: "10px" }} cursor={<CustomCursor currentChartProprotions={currentChartProprotions}/>} content={CustomTooltip}  wrapperStyle={{ zIndex: 1 }}/>
+          <Line type="monotone" dataKey="sessionLength" stroke="#fff" strokeWidth={2} dot={false} strokeLinecap="round"/>
         </LineChart>
       </ResponsiveContainer>
     </div>

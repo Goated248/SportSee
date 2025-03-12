@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .line-chart {
   background-color: #FF0000;
   width: 100%;
@@ -6,6 +7,7 @@
   max-height: 263px;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.5);
+  position: relative;
 }
 
 .session-tooltip {
@@ -17,4 +19,19 @@
   justify-content: center;
   align-items: center;
   font-size: 8px;
+}
+
+.chart-title {
+  position: absolute;
+  width: 148px;
+  height: 57px;
+  top: 29px;
+  left: 34px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  opacity: 0.6;
+  z-index: 10;
+  pointer-events: none; /* Empêche toute interaction avec le texte */
 }/*# sourceMappingURL=AverageSession.css.map */
