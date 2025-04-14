@@ -20,7 +20,7 @@ const KeyInfos = ()=> {
                 const data = await getUserInfo(userId);
                 setUser(data.data); 
             } catch (error) {
-                console.error("Erreur lors de la récupération des données :", error);
+              setError("Erreur lors de la récupération des données.");
             }finally{
               setLoading(false)
             }

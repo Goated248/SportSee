@@ -43,7 +43,7 @@ const ActivityType = () => {
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="48%" cy="50%" outerRadius="65%" data={performanceData}>
           <PolarGrid  stroke="#fff" radialLines={false} />
-          <PolarAngleAxis dataKey="subject" stroke="#fff" tickLine={false} tick={({ payload, x, y, textAnchor, radius, index }) => (
+          <PolarAngleAxis dataKey="subject" stroke="#fff" tickLine={false} tick={({ payload, x, y, textAnchor}) => (
     <text
       x={x}
       y={y}

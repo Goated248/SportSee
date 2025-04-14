@@ -68,8 +68,8 @@ const Score = ()=> {
             cy="50%" 
             innerRadius="80%" 
             outerRadius="100%" 
-            startAngle={90} 
-            endAngle={90 + (360 * score)} 
+            startAngle={180} 
+            endAngle={180 - (360 * score)} 
             barSize={10} 
             data={data}
             radius={[50, 50, 0, 0]}
