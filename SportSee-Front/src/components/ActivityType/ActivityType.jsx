@@ -1,7 +1,7 @@
 import "./ActivityType.css"
 import React, {useState, useEffect} from "react"
 import { useParams } from "react-router-dom";
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
 import { getUserPerformance } from "../../api/api";
 
 
@@ -25,7 +25,7 @@ const ActivityType = () => {
 
         setPerformanceData(formattedData);
       } catch (error) {
-        setError("Erreur lors de la récupération des performances.");
+        setError("Erreur lors de la récupération des données.");
       } finally {
         setLoading(false);
       }
@@ -43,7 +43,18 @@ const ActivityType = () => {
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="48%" cy="50%" outerRadius="65%" data={performanceData}>
           <PolarGrid  stroke="#fff" radialLines={false} />
-          <PolarAngleAxis dataKey="subject" stroke="#fff" />
+          <PolarAngleAxis dataKey="subject" stroke="#fff" tickLine={false} tick={({ payload, x, y, textAnchor, radius, index }) => (
+    <text
+      x={x}
+      y={y}
+      textAnchor={textAnchor}
+      fill="#fff"
+      fontSize={10}
+      dy={4}
+    >
+      {payload.value}
+    </text>
+  )}  />
           
           <Radar name="Performance" dataKey="value" stroke="#ff0000" fill="#ff0000" fillOpacity={0.6} />
         </RadarChart>

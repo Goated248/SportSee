@@ -15,7 +15,7 @@ const VerticalBar = () => {
           <img src={icon3} alt="Icon 4" />
         </div>
         <div className="copyright">
-          © SportSee2020
+          Copyright SportSee2020©
         </div>
       </div>
     );

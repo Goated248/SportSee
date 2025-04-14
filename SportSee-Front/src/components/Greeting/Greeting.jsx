@@ -6,19 +6,27 @@ import { useParams } from "react-router-dom";
 const Greeting = ()=> {
     const [user, setUser] = useState(null);
     const {userId} = useParams();
+    const [error, setError]= useState(null);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchUser = async () => {
             try {
+              setLoading(true);
                 const data = await getUserInfo(userId);
                 setUser(data.data.userInfos); 
             } catch (error) {
-                console.error("Erreur lors de la récupération des données :", error);
+              setError("Erreur lors de la récupération des données.");
+            }finally{
+              setLoading(false)
             }
         };
 
         fetchUser();
     }, [userId]);
 
+    if (loading) return <p>Chargement...</p>;
+    if (error) return <p>{error}</p>;
+    if (!user) return <p>Aucune donnée disponible</p>;
       return (
         <div className="greeting">
           {user ? <>

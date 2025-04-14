@@ -11,21 +11,26 @@ import lipIcon from "../../assets/cheeseburger.svg";
 const KeyInfos = ()=> {
     const [user, setUser] = useState(null);
     const {userId} = useParams();
+    const [error, setError]= useState(null);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchUser = async () => {
             try {
+              setLoading(true)
                 const data = await getUserInfo(userId);
                 setUser(data.data); 
             } catch (error) {
                 console.error("Erreur lors de la récupération des données :", error);
+            }finally{
+              setLoading(false)
             }
         };
 
         fetchUser();
     }, []);
-    if (!user) {
-        return <div>Loading...</div>;
-      }
+    if (loading) return <p>Chargement...</p>;
+    if (error) return <p>{error}</p>;
+    if (!user) return <p>Erreur lors de la récupération des données </p>;
     
     return (
         <div className="key-infos">

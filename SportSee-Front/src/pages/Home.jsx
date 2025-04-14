@@ -9,7 +9,7 @@ import AverageSession from "../components/AverageSession/AverageSession"
 import ActivityType from "../components/ActivityType/ActivityType"
 import Score from "../components/Score/Score"
 
-const Home = ({ userId }) => {
+const Home = () => {
     return (
         <div className="container">
         <Navbar />

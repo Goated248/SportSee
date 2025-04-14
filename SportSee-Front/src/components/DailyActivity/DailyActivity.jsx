@@ -55,7 +55,7 @@ const DailyActivity = () => {
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
-  if (!activityData) return <p>Aucune donnée disponible</p>;
+  if (!activityData) return <p>Erreur lors de la récupération des données</p>;
 
 const minPoids = Math.min(...activityData.map(session => session.poids)) - 1;
 const maxPoids = Math.max(...activityData.map(session => session.poids)) + 1;
@@ -72,10 +72,10 @@ const maxCal = Math.max(...activityData.map(session => session.calories)) + 25;
     <BarChart data={activityData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }} barSize={8}>
   <CartesianGrid strokeDasharray="3 3" />
 
-  {/* YAxis pour le poids (visible) */}
+  {/* YAxis pour le poids  */}
   <YAxis yAxisId="left" orientation="right" tick={{ fill: '#74798C' }} domain={[minPoids, maxPoids]}/>
 
-  {/* YAxis pour les calories (invisible) */}
+  {/* YAxis pour les calories  */}
   <YAxis yAxisId="right"  domain={[minCal, maxCal]} hide = {true}/>
 
   <XAxis dataKey="day" tickLine={false} axisLine={false} />
@@ -88,7 +88,7 @@ const maxCal = Math.max(...activityData.map(session => session.calories)) + 25;
 
   {/* Associer chaque Bar à son YAxis */}
   <Bar dataKey="poids" fill="#000000" name="Poids (kg)" radius={[50, 50, 0, 0]} yAxisId="left" />
-  <Bar dataKey="calories" fill="#E60000" name="Calories brûlées" radius={[50, 50, 0, 0]} yAxisId="right" />
+  <Bar dataKey="calories" fill="#E60000" name="Calories brûlées(Kcal)" radius={[50, 50, 0, 0]} yAxisId="right" />
 </BarChart>
     </ResponsiveContainer>
     </div>

@@ -7,17 +7,17 @@
   }
   
   .icons {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    justify-content: flex-end;
     align-items: center;
 
   }
   .icons img {
     width: 64px;
     height: 64px;
-
+    padding-top:20px;
   }
   
   .copyright {
@@ -26,6 +26,7 @@
     font-size: 12px;
     display:flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-family: 'Roboto', sans-serif;
+    padding-bottom: 50px;
   }

@@ -10,7 +10,7 @@ import { getUserInfo } from "../../api/api";
 
 const Score = ()=> {
   const { userId } = useParams(); // Récupération de userId depuis l'URL
-  const [score, setScore] = useState(null); // État pour stocker le score
+  const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,14 +22,14 @@ const Score = ()=> {
         const userScore = data.data.todayScore || data.data.score
         setScore(userScore);
       } catch (err) {
-        setError("Impossible de récupérer les données");
+        setError("Erreur lors de la récupération des données.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [userId]); // Se met à jour si userId change
+  }, [userId]);
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
@@ -55,7 +55,7 @@ const Score = ()=> {
 
     //donnée pour graphique
     const data = [
-      { name: "Completion", value: scorePercentage, fill: "#ff0000" }, // Jauge rouge
+      { name: "Completion", value: scorePercentage, fill: "#ff0000" },
       
     ];
   

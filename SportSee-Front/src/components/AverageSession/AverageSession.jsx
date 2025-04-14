@@ -16,14 +16,13 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const CustomCursor = ({ points, currentChartProprotions }) => {
+  
   if (!points || points.length === 0) return null;
   const { x } = points[0];
 
   return (
     <Rectangle
-      fill="rgba(255, 255, 255, 0.2)"
-
-      
+      fill="rgba(190,0,0,0.2)"
       x={x}
       y={0}
       width={currentChartProprotions?.clientWidth}
@@ -43,9 +42,7 @@ const AverageSession = () => {
   const [currentChartProprotions, setCurrentChartProportions] = useState(null);
 
   useEffect(() => {
-    if (containerRef?.current) {
-      setCurrentChartProportions(containerRef.current);
-    }
+ 
 
     const fetchUserSession = async () => {
       try {
@@ -74,9 +71,15 @@ const AverageSession = () => {
     fetchUserSession();
   }, [userId]);
 
+  useEffect(() => {
+    if (containerRef?.current) {
+      setCurrentChartProportions(containerRef.current);
+    }
+  }, [loading]);
+  console.log(containerRef)
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
-  if (!sessionData) return <p>Aucune donnée disponible</p>;
+  if (!sessionData) return <p>Erreur lors de la récupération des données.</p>;
 
   return (
     <div className="line-chart">
