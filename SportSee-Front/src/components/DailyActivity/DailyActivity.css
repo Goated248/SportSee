@@ -6,7 +6,9 @@
 }
 
 .daily-activity {
+  font-family: "Roboto", sans-serif;
   height: 260px;
+  background-color: #FBFBFB;
 }
 .daily-activity h3 {
   margin-top: 0;

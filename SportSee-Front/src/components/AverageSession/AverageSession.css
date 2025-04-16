@@ -34,4 +34,8 @@
   opacity: 0.6;
   z-index: 10;
   pointer-events: none;
+}
+
+.line-chart {
+  font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=AverageSession.css.map */

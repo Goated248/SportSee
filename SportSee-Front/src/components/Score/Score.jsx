@@ -1,7 +1,7 @@
 import "./Score.css"
 import { useParams } from "react-router-dom";
 import React,{useEffect, useState} from "react"
-import { RadialBarChart, RadialBar, ResponsiveContainer, Legend } from "recharts";
+import { RadialBarChart, RadialBar, ResponsiveContainer, Layer} from "recharts";
 import { getUserInfo } from "../../api/api";
  
 
@@ -64,7 +64,7 @@ const Score = ()=> {
         
         <ResponsiveContainer width="100%" height={300}>
           <RadialBarChart
-            cx="60%" 
+            cx="50%" 
             cy="50%" 
             innerRadius="80%" 
             outerRadius="100%" 
@@ -74,6 +74,14 @@ const Score = ()=> {
             data={data}
             radius={[50, 50, 0, 0]}
           >
+            
+            <circle
+              cx="50%"
+              cy="50%"
+              r="80"
+              fill="white"
+            />
+          
             <text x="50%" y="20" textAnchor="middle" fontSize="16" fontWeight="bold" color="rgba(255, 255, 255, 0.5)">
         Score
        </text>
