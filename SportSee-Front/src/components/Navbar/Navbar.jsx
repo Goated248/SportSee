@@ -1,7 +1,7 @@
 import "./Navbar.css"
 import React from "react"
 import logo from '../../assets/logo.png'
-const Navbar = ()=> {
+const Navbar = () => {
 
     return (
         <header>

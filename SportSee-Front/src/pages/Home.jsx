@@ -1,5 +1,5 @@
 import "./Home.css"
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import Navbar from '../components/Navbar/Navbar'
 import Greeting from '../components/Greeting/Greeting'
 import DailyActivity from '../components/DailyActivity/DailyActivity'
@@ -12,22 +12,22 @@ import Score from "../components/Score/Score"
 const Home = () => {
     return (
         <div className="container">
-        <Navbar />
+            <Navbar />
             <div className="main-page">
                 <VerticalBar />
                 <div className="active-page">
-                
+
                     <div className="active-page_main">
                         <Greeting />
                         <DailyActivity />
                         <div className="active-page_main_charts">
-                        <AverageSession/>
-                        <ActivityType/>
-                        <Score/>
+                            <AverageSession />
+                            <ActivityType />
+                            <Score />
                         </div>
                     </div>
                     <div className="active-page_key_infos">
-                        <KeyInfos/>
+                        <KeyInfos />
                     </div>
                 </div>
             </div>

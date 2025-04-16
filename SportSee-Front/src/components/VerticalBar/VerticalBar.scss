@@ -1,32 +1,33 @@
 .vertical-bar {
-    width: 117px;
-    background-color: black;
-    display: grid;
-    grid-template-columns:1fr;
-    
-  }
-  
-  .icons {
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    justify-content: flex-end;
-    align-items: center;
+  width: 117px;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr;
 
-  }
-  .icons img {
-    width: 64px;
-    height: 64px;
-    padding-top:20px;
-  }
-  
-  .copyright {
-    writing-mode: sideways-lr;
-    color: white;
-    font-size: 12px;
-    display:flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Roboto', sans-serif;
-    padding-bottom: 50px;
-  }
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.icons img {
+  width: 64px;
+  height: 64px;
+  padding-top: 20px;
+}
+
+.copyright {
+  writing-mode: sideways-lr;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 50px;
+}

@@ -1,7 +1,7 @@
 import "./AverageSession.css";
 import { getUserAverageSessions } from "../../api/api";
-import React, {useEffect, useState, useRef} from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,Rectangle } from "recharts";
+import React, { useEffect, useState, useRef } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Rectangle } from "recharts";
 import { useParams } from "react-router-dom";
 
 const CustomTooltip = ({ active, payload }) => {
@@ -16,7 +16,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const CustomCursor = ({ points, currentChartProprotions }) => {
-  
+
   if (!points || points.length === 0) return null;
   const { x } = points[0];
 
@@ -33,7 +33,7 @@ const CustomCursor = ({ points, currentChartProprotions }) => {
 };
 
 const AverageSession = () => {
-  const {userId} = useParams();
+  const { userId } = useParams();
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,23 +42,23 @@ const AverageSession = () => {
   const [currentChartProprotions, setCurrentChartProportions] = useState(null);
 
   useEffect(() => {
- 
+
 
     const fetchUserSession = async () => {
       try {
         setLoading(true);
         const sessionData = await getUserAverageSessions(userId);
         const daysMapping = ["L", "M", "M", "J", "V", "S", "D"];
-        
+
         const formattedData = [
-          { day: "", sessionLength: sessionData.data.sessions[0].sessionLength }, 
+          { day: "", sessionLength: sessionData.data.sessions[0].sessionLength },
           ...sessionData.data.sessions.map(session => ({
             day: daysMapping[session.day - 1],
             sessionLength: session.sessionLength
           })),
-          { day: "", sessionLength: sessionData.data.sessions[sessionData.data.sessions.length - 1].sessionLength } 
+          { day: "", sessionLength: sessionData.data.sessions[sessionData.data.sessions.length - 1].sessionLength }
         ];
-        
+
 
         setSessionData(formattedData);
       } catch (error) {
@@ -76,24 +76,24 @@ const AverageSession = () => {
       setCurrentChartProportions(containerRef.current);
     }
   }, [loading]);
-  console.log(containerRef)
+
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
   if (!sessionData) return <p>Erreur lors de la récupération des données.</p>;
 
   return (
     <div className="line-chart">
-  
-  <div className="chart-title">Durée moyenne des <br /> sessions</div>
+
+      <div className="chart-title">Durée moyenne des <br /> sessions</div>
       <ResponsiveContainer width="100%" height="100%" ref={containerRef}>
         <LineChart data={sessionData} >
-        <YAxis 
-      hide={true} 
-      domain={['dataMin - 10', 'dataMax + 20']} // Ajoute un écart pour descendre la ligne
-    />
-          <XAxis padding={{ left: -20, right: -20 }} tickLine={false} axisLine={false} dataKey="day" stroke="#8884d8" tick={{ fill: '#FFFFFF', opacity: '0.5' }}/>
-          <Tooltip contentStyle={{ backgroundColor: "#fff", borderRadius: "10px" }} cursor={<CustomCursor currentChartProprotions={currentChartProprotions}/>} content={CustomTooltip}  wrapperStyle={{ zIndex: 1 }}/>
-          <Line type="monotone" dataKey="sessionLength" stroke="#fff" strokeWidth={2} dot={false} strokeLinecap="round"/>
+          <YAxis
+            hide={true}
+            domain={['dataMin - 10', 'dataMax + 20']} // Ajoute un écart pour descendre la ligne
+          />
+          <XAxis padding={{ left: -20, right: -20 }} tickLine={false} axisLine={false} dataKey="day" stroke="#8884d8" tick={{ fill: '#FFFFFF', opacity: '0.5' }} />
+          <Tooltip contentStyle={{ backgroundColor: "#fff", borderRadius: "10px" }} cursor={<CustomCursor currentChartProprotions={currentChartProprotions} />} content={CustomTooltip} wrapperStyle={{ zIndex: 1 }} />
+          <Line type="monotone" dataKey="sessionLength" stroke="#fff" strokeWidth={2} dot={false} strokeLinecap="round" />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -101,4 +101,3 @@ const AverageSession = () => {
 };
 
 export default AverageSession;
-          

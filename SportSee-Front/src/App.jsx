@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 function App() {
     return (
         <Router>
-        <Routes>
-        <Route path="/:userId" element={<Home />} /> 
-        <Route path="/" element={<Home />} />
-        </Routes>
-    </Router>
+            <Routes>
+                <Route path="/:userId" element={<Home />} />
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </Router>
     )
 }
 

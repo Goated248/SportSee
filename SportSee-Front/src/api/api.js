@@ -55,13 +55,13 @@ export const getUserAverageSessions = async (userId) => {
 export const getUserPerformance = async (userId) => {
   try {
     if (USE_API) {
-    const response = await axios.get(`${BASE_URL}/${userId}/performance`);
-    return response.data;
-  } else {
-    const response = await fetch(`/mock/userPerformance${userId}.json`)
+      const response = await axios.get(`${BASE_URL}/${userId}/performance`);
+      return response.data;
+    } else {
+      const response = await fetch(`/mock/userPerformance${userId}.json`)
       const data = await response.json()
       return data
-  }
+    }
   } catch (error) {
     console.error('Error fetching user performance:', error);
     throw error;
